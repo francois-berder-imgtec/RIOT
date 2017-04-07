@@ -28,6 +28,8 @@
 extern "C" {
 #endif
 
+#include "vendor/p32mz2048efg100.h"
+
 /**
  * @brief The peripheral clock is required for the UART Baud rate calculation
  *        It is configured by the 'config' registers (see pic32_config_settings.c)
@@ -54,6 +56,47 @@ extern "C" {
 #define UART_NUMOF          (6)
 #define DEBUG_VIA_UART      (4)
 #define DEBUG_UART_BAUD     (9600)
+/** @} */
+
+/**
+ * @name    SPI device configuration
+ *
+ * @{
+ */
+
+static const spi_conf_t spi_config[] = {
+    {}, /* No SPI0 on PIC32 */
+
+    {   /*
+         * SPI 1 (J10 connector)
+         *      MOSI -> RE5
+         *      MISO -> RD2
+         *      SCK  -> RD1
+         */
+        .mosi_pin = GPIO_PIN(PORT_E, 5),
+        .mosi_reg = (volatile uint32_t*)&RPE5R,
+        .mosi_af  = 0b0101,
+        .miso_pin = GPIO_PIN(PORT_D, 2),
+        .miso_reg = (volatile uint32_t*)&SDI1R,
+        .miso_af  = 0b000
+    },
+
+    {   /*
+         * SPI 2 (J9 connector)
+         *      MOSI -> RF0
+         *      MISO -> RD11
+         *      SCK  -> RG6
+         */
+        .mosi_pin = GPIO_PIN(PORT_F, 0),
+        .mosi_reg = (volatile uint32_t*)&RPF0R,
+        .mosi_af  = 0b0110,
+        .miso_pin = GPIO_PIN(PORT_D, 11),
+        .miso_reg = (volatile uint32_t*)&SDI2R,
+        .miso_af  = 0b0011,
+    },
+};
+
+#define SPI_NUMOF           (2)
 /** @} */
 
 #ifdef __cplusplus
