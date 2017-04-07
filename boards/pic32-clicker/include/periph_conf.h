@@ -30,6 +30,8 @@ extern "C" {
 #endif
 
 
+#include "vendor/p32mx470f512h.h"
+
 /**
  * @brief The peripheral clock is required for the UART Baud rate calculation
  *        It is configured by the 'config' registers (see pic32_config_settings.c)
@@ -57,6 +59,48 @@ extern "C" {
 #define UART_NUMOF          (4)
 #define DEBUG_VIA_UART      (3)
 #define DEBUG_UART_BAUD     (9600)
+/** @} */
+
+
+/**
+ * @name    SPI device configuration
+ *
+ * @{
+ */
+
+static const spi_conf_t spi_config[] = {
+    {}, /* No SPI0 on PIC32 */
+
+    {   /*
+         * SPI 1 (Mikrobus)
+         *      MOSI -> RD4
+         *      MISO -> RD3
+         *      SCK  -> RD2
+         */
+        .mosi_pin = GPIO_PIN(PORT_D, 4),
+        .mosi_reg = (volatile uint32_t*)&RPD4R,
+        .mosi_af  = 0b1000,
+        .miso_pin = GPIO_PIN(PORT_D, 3),
+        .miso_reg = (volatile uint32_t*)&SDI1R,
+        .miso_af  = 0b0000
+    },
+
+    {   /*
+         * SPI 2 (6LoWPAN radio)
+         *      MOSI -> RG8
+         *      MISO -> RG7
+         *      SCK  -> RG6
+         */
+        .mosi_pin = GPIO_PIN(PORT_G, 8),
+        .mosi_reg = (volatile uint32_t*)&RPG8R,
+        .mosi_af  = 0b0110,
+        .miso_pin = GPIO_PIN(PORT_G, 7),
+        .miso_reg = (volatile uint32_t*)&SDI2R,
+        .miso_af  = 0b0001
+    }
+};
+
+#define SPI_NUMOF           (2)
 /** @} */
 
 #ifdef __cplusplus
