@@ -86,6 +86,27 @@ typedef struct {
     gpio_t miso_pin;                /**< GPIO pin for MISO */
 } spi_conf_t;
 
+/**
+ * @brief   Override I2C speed settings
+ * @{
+ */
+#define HAVE_I2C_SPEED_T
+typedef enum {
+    I2C_SPEED_LOW       = 10000,    /**< ~10kbit/s */
+    I2C_SPEED_NORMAL    = 100000,   /**< ~100kbit/s */
+    I2C_SPEED_FAST      = 400000,   /**< ~400kbit/s */
+    I2C_SPEED_FAST_PLUS = 1000000,  /**< ~1Mbit/s */
+    I2C_SPEED_HIGH      = 0,        /**< Not supported */
+} i2c_speed_t;
+/** @} */
+
+/**
+ * @brief   I2C device configuration
+ */
+typedef struct {
+    gpio_t scl_pin;                /**< GPIO pin for SCL */
+    gpio_t sda_pin;                /**< GPIO pin for SDA */
+} i2c_conf_t;
 
 #ifdef __cplusplus
 }
