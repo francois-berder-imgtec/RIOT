@@ -99,6 +99,49 @@ static const spi_conf_t spi_config[] = {
 #define SPI_NUMOF           (2)
 /** @} */
 
+/**
+ * @name    I2C device configuration
+ *
+ * @{
+ */
+
+static const i2c_conf_t i2c_config[] = {
+    {}, /* No I2C0 on PIC32 */
+
+    {   /*
+         * No I2C 1, since SDA pin is connected
+         * only to the INT pin of MRF24WG0MA
+         */
+    },
+
+    {   /* I2C 2 (J7 and J10 connector)
+         *      SCL -> RA2
+         *      SDA -> RA3
+         */
+        .scl_pin = GPIO_PIN(PORT_A, 2),
+        .sda_pin = GPIO_PIN(PORT_A, 3)
+    },
+
+    {   /* I2C 3 (J10 connector)
+         *      SCL -> RF8
+         *      SDA -> RF2
+         */
+        .scl_pin = GPIO_PIN(PORT_F, 8),
+        .sda_pin = GPIO_PIN(PORT_F, 2)
+    },
+
+    {   /* I2C 4 (J6 and J8 connector)
+         *      SCL -> RG8
+         *      SDA -> RG7
+         */
+        .scl_pin = GPIO_PIN(PORT_G, 8),
+        .sda_pin = GPIO_PIN(PORT_G, 7)
+    }
+};
+
+#define I2C_NUMOF           (4)
+/** @} */
+
 #ifdef __cplusplus
 }
 #endif
