@@ -103,6 +103,27 @@ static const spi_conf_t spi_config[] = {
 #define SPI_NUMOF           (2)
 /** @} */
 
+/**
+ * @name    I2C device configuration
+ *
+ * @{
+ */
+
+static const i2c_conf_t i2c_config[] = {
+    {}, /* No I2C0 on PIC32 */
+
+    {   /* I2C 1 (Mikrobus)
+         *      SCL -> RD10
+         *      SDA -> RD9
+         */
+        .scl_pin = GPIO_PIN(PORT_D, 10),
+        .sda_pin = GPIO_PIN(PORT_D, 9)
+    }
+};
+
+#define I2C_NUMOF           (1)
+/** @} */
+
 #ifdef __cplusplus
 }
 #endif
