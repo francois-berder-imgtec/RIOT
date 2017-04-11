@@ -28,6 +28,11 @@ extern "C" {
 #endif
 
 /**
+ * @brief   Length of the CPU_ID in bytes
+ */
+#define CPUID_LEN           (4U)
+
+/**
  * @brief   Define a custom type for GPIO pins
  * @{
  */
