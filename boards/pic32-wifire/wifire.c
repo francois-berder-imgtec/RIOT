@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include "periph/gpio.h"
+#include "periph/hwrng.h"
 #include "periph/spi.h"
 #include "periph/uart.h"
 #include "bitarithm.h"
@@ -20,6 +21,8 @@ extern void dummy(void);
 
 void board_init(void)
 {
+    hwrng_init();
+
     /*
      * Setup pin mux for UART4 this is the one connected
      * to the ftdi chip (usb<->uart)
