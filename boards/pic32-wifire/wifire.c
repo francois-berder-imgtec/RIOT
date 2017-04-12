@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include "periph/gpio.h"
+#include "periph/hwrng.h"
 #include "periph/spi.h"
 #include "periph/uart.h"
 #include "bitarithm.h"
@@ -31,6 +32,8 @@ void board_init(void)
 #ifdef DEBUG_VIA_UART
     uart_init(DEBUG_VIA_UART, DEBUG_UART_BAUD, NULL, 0);
 #endif
+
+    hwrng_init();
 
     /* Initialise all SPI modules */
     for (unsigned i = 1; i <= SPI_NUMOF; i++)
