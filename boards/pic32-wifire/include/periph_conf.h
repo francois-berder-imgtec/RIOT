@@ -142,6 +142,15 @@ static const i2c_conf_t i2c_config[] = {
 #define I2C_NUMOF           (4)
 /** @} */
 
+
+/**
+ * @name    RTC device configuration
+ *
+ * @{
+ */
+#define RTC_NUMOF           (1)
+/** @} */
+
 #ifdef __cplusplus
 }
 #endif
