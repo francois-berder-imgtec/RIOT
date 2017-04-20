@@ -21,8 +21,6 @@ extern void dummy(void);
 
 void board_init(void)
 {
-    hwrng_init();
-
     /*
      * Setup pin mux for UART4 this is the one connected
      * to the ftdi chip (usb<->uart)
