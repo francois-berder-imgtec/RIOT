@@ -12,6 +12,7 @@
 #include <stdint.h>
 #include "periph/gpio.h"
 #include "periph/hwrng.h"
+#include "periph/pcache.h"
 #include "periph/spi.h"
 #include "periph/uart.h"
 #include "bitarithm.h"
@@ -21,6 +22,8 @@ extern void dummy(void);
 
 void board_init(void)
 {
+    pcache_init();
+
     /*
      * Setup pin mux for UART4 this is the one connected
      * to the ftdi chip (usb<->uart)

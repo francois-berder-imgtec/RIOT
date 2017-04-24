@@ -36,6 +36,8 @@ extern "C" {
 
 #include "vendor/p32mz2048efg100.h"
 
+#define SYSTEM_CLOCK    (200000000) /* 200 MHz */
+
 /**
  * @brief       Set how many increments of the count register per uS
  *              needed by the timer code.
