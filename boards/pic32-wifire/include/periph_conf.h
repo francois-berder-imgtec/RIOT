@@ -151,6 +151,17 @@ static const i2c_conf_t i2c_config[] = {
 #define RTC_NUMOF           (1)
 /** @} */
 
+
+/**
+ * @name    Flash device configuration
+ *
+ * @{
+ */
+ #define FLASHPAGE_SIZE     (16 * 1024)
+
+ #define FLASHPAGE_NUMOF    ((__PIC32_FLASH_SIZE * 1024) / FLASHPAGE_SIZE)
+/** @} */
+
 #ifdef __cplusplus
 }
 #endif
