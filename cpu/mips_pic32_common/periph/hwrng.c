@@ -58,15 +58,20 @@ void hwrng_read(void *buf, unsigned int num)
     RNGCON |= _RNGCON_PRNGEN_MASK;
 
     for (i = 0; i < num >> 3; ++i) {
+        uint32_t rng1, rng2;
         wait_plen_cycles();
-        memcpy(buf, (uint32_t*)&RNGNUMGEN1, 4);
-        memcpy(buf + 4, (uint32_t*)&RNGNUMGEN1, 4);
+        rng1 = RNGNUMGEN1;
+        rng2 = RNGNUMGEN2;
+        memcpy(buf, &rng1, 4);
+        memcpy(buf + 4, &rng2, 4);
         buf += 8;
     }
 
     for (i = 0; i < (num & 7); ++i) {
+        uint32_t rng1;
         wait_plen_cycles();
-        memcpy(buf, (uint32_t*)&RNGNUMGEN1, 1);
+        rng1 = RNGNUMGEN1;
+        memcpy(buf, &rng1, 1);
         ++buf;
     }
 
