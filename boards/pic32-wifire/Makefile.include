@@ -4,3 +4,8 @@ export APPDEPS += $(RIOTCPU)/$(CPU)/$(CPU_MODEL)/$(CPU_MODEL).S
 export USE_UHI_SYSCALLS = 1
 
 FLASHFILE ?= $(HEXFILE)
+
+ifeq ($(PROGRAMMER),pickit)
+  export PICKIT_DEVICE := PIC32MZ2048EFG100
+  include $(RIOTMAKE)/tools/pickit.inc.mk
+endif
