@@ -2,6 +2,9 @@ include $(RIOTCPU)/mips32r2_common/Makefile.include
 
 CFLAGS += -DCPU_FAM_$(call uppercase_and_underscore,$(CPU_FAM))
 
+# mips32 needs periph_timer for its gettimeofday() implementation
+export USEMODULE += periph_timer
+
 INCLUDES += -I$(RIOTCPU)/mips_pic32_common/include
 
 USEMODULE += mips_pic32_common

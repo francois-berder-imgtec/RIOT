@@ -4,9 +4,6 @@ export USEMODULE += mips32r2_common
 export USEMODULE += mips32r2_common_periph
 export USEMODULE += newlib
 
-# mips32 needs periph_timer for its gettimeofday() implementation
-export USEMODULE += periph_timer
-
 ifeq ($(USE_UHI_SYSCALLS),1)
   #Use UHI to handle syscalls
   LINKFLAGS += -luhi
