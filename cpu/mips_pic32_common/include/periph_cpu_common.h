@@ -45,6 +45,21 @@ extern "C" {
  */
 #define CPUID_LEN           (4U)
 
+/**
+ * @brief Watchdog can be stopped.
+ *
+ * Note that this assumes FWDTEN is not set to 1 in configuration bits
+ */
+#define WDT_HAS_STOP                   (1)
+
+/**
+ * @name    WDT upper and lower bound times in ms
+ * @{
+ */
+#define NWDT_TIME_LOWER_LIMIT           (1)
+#define NWDT_TIME_UPPER_LIMIT           (8192U)
+/** @} *
+
 #ifndef DOXYGEN
 /**
  * @brief   Overwrite the default gpio_t type definition
