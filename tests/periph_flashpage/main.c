@@ -225,10 +225,10 @@ static int cmd_write_raw(int argc, char **argv)
 
     flashpage_write_raw((void*)addr, raw_buf, strlen(raw_buf));
 #if (__SIZEOF_POINTER__ == 2)
-    printf("wrote local data to flash address %#" PRIx16 " of len %u\n",
+    printf("wrote local data to flash address %#" PRIx16 " of len %zu\n",
            addr, strlen(raw_buf));
 #else
-    printf("wrote local data to flash address %#" PRIx32 " of len %u\n",
+    printf("wrote local data to flash address %#" PRIx32 " of len %zu\n",
            addr, strlen(raw_buf));
 #endif
     return 0;
