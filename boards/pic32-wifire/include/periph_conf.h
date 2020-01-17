@@ -63,6 +63,47 @@ static const uart_conf_t uart_config[] = {
 #define UART_NUMOF          ((unsigned int)ARRAY_SIZE(uart_config))
 /** @} */
 
+/**
+ * @name    SPI device configuration
+ *
+ * @{
+ */
+
+static const spi_conf_t spi_config[] = {
+    {   /*
+         * SPI 3 (microSD card)
+         *   MOSI -> RC4
+         *   MISO -> RB10
+         *   SCK  -> RB14
+         */
+        .base     = (volatile uint32_t *)_SPI3_BASE_ADDRESS,
+        .mosi_pin = GPIO_PIN(PORT_C, 4),
+        .mosi_reg = (volatile uint32_t*)&RPC4R,
+        .mosi_af  = 0b0111,
+        .miso_pin = GPIO_PIN(PORT_B, 10),
+        .miso_reg = (volatile uint32_t*)&SDI3R,
+        .miso_af  = 0b0110,
+    },
+
+    {   /*
+         * SPI 4 (MRF24WG0MA - wifi module)
+         *   MOSI -> RG0
+         *   MISO -> RF5
+         *   SCK  -> RD10
+         */
+        .base     = (volatile uint32_t *)_SPI4_BASE_ADDRESS,
+        .mosi_pin = GPIO_PIN(PORT_G, 0),
+        .mosi_reg = (volatile uint32_t*)&RPG0R,
+        .mosi_af  = 0b1000,
+        .miso_pin = GPIO_PIN(PORT_F, 5),
+        .miso_reg = (volatile uint32_t*)&SDI4R,
+        .miso_af  = 0b0010,
+    },
+};
+
+#define SPI_NUMOF           ARRAY_SIZE(spi_config)
+/** @} */
+
 #ifdef __cplusplus
 }
 #endif
