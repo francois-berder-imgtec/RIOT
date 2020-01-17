@@ -67,6 +67,46 @@ static const uart_conf_t uart_config[] = {
 #define UART_NUMOF          ((unsigned int)ARRAY_SIZE(uart_config))
 /** @} */
 
+/**
+ * @name    SPI device configuration
+ *
+ * @{
+ */
+static const spi_conf_t spi_config[] = {
+    {   /*
+         * SPI 1 (Mikrobus)
+         *      MOSI -> RD4
+         *      MISO -> RD3
+         *      SCK  -> RD2
+         */
+        .base = (volatile uint32_t *)_SPI1_BASE_ADDRESS,
+        .mosi_pin = GPIO_PIN(PORT_D, 4),
+        .mosi_reg = (volatile uint32_t*)&RPD4R,
+        .mosi_af  = 0b1000,
+        .miso_pin = GPIO_PIN(PORT_D, 3),
+        .miso_reg = (volatile uint32_t*)&SDI1R,
+        .miso_af  = 0b0000
+    },
+
+    {   /*
+         * SPI 2 (6LoWPAN radio)
+         *      MOSI -> RG8
+         *      MISO -> RG7
+         *      SCK  -> RG6
+         */
+        .base = (volatile uint32_t *)_SPI2_BASE_ADDRESS,
+        .mosi_pin = GPIO_PIN(PORT_G, 8),
+        .mosi_reg = (volatile uint32_t*)&RPG8R,
+        .mosi_af  = 0b0110,
+        .miso_pin = GPIO_PIN(PORT_G, 7),
+        .miso_reg = (volatile uint32_t*)&SDI2R,
+        .miso_af  = 0b0001
+    }
+};
+
+#define SPI_NUMOF           ARRAY_SIZE(spi_config)
+/** @} */
+
 #ifdef __cplusplus
 }
 #endif
