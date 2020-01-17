@@ -67,6 +67,24 @@ extern "C" {
 #endif
 /** @} */
 
+/**
+ * @brief   Flash page configuration
+ * @{
+ */
+#define FLASHPAGE_SIZE          (16384U)
+
+#if defined(CPU_MODEL_P32MZ2048EFG100)
+#define FLASHPAGE_NUMOF         (128U)
+#endif
+
+/* The minimum block size which can be written is 4B. However, the erase
+ * block is always FLASHPAGE_SIZE.
+ */
+#define FLASHPAGE_RAW_BLOCKSIZE    (4U)
+/* Writing should be always 4 bytes aligned */
+#define FLASHPAGE_RAW_ALIGNMENT    (4U)
+/** @} */
+
 #ifdef __cplusplus
 }
 #endif
