@@ -429,7 +429,7 @@ int cmd_i2c_get_devs(int argc, char **argv)
     (void)argv;
     (void)argc;
     printf("Command: return I2C_NUMOF\n");
-    printf("Success: Amount of i2c devices: [%d]\n", I2C_NUMOF);
+    printf("Success: Amount of i2c devices: [%d]\n", (int)I2C_NUMOF);
     return 0;
 }
 
