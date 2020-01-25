@@ -101,6 +101,22 @@ typedef enum {
     GPIO_AF15               /**< use alternate function 15 */
 } gpio_af_t;
 
+#ifndef DOXYGEN
+/**
+ * @brief   Override I2C speed values.
+ * @{
+ */
+#define HAVE_I2C_SPEED_T
+typedef enum {
+    I2C_SPEED_LOW = 10000,            /**< low speed mode: ~10kbit/s */
+    I2C_SPEED_NORMAL = 100000,        /**< normal mode: ~100kbit/s */
+    I2C_SPEED_FAST = 400000,          /**< fast mode: ~400kbit/sj */
+    I2C_SPEED_FAST_PLUS = 1000000,    /**< fast plus mode: ~1Mbit/s */
+    I2C_SPEED_HIGH = 3400000,         /**< high speed mode: ~3.4Mbit/s */
+} i2c_speed_t;
+/** @} */
+#endif
+
 /**
  * @brief   Structure for UART configuration data
  */
@@ -118,6 +134,17 @@ typedef struct {
     uint32_t irq;
 #endif
 } uart_conf_t;
+
+
+/**
+ * @brief   Structure for I2C configuration data
+ */
+typedef struct {
+    volatile unsigned int * base;   /**< I2C device base register address */
+    i2c_speed_t speed;              /**< baudrate used for the bus */
+    gpio_t scl_pin;                 /**< SCL pin */
+    gpio_t sda_pin;                 /**< SDA pin */
+} i2c_conf_t;
 
 #ifdef __cplusplus
 }
