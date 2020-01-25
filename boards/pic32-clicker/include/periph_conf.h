@@ -67,6 +67,22 @@ static const uart_conf_t uart_config[] = {
 #define UART_NUMOF          ARRAY_SIZE(uart_config)
 /** @} */
 
+/**
+  * @name    I2C Definitions
+  * @{
+  */
+static const i2c_conf_t i2c_config[] = {
+    {   /* I2C port available on Mikrobus connector */
+        .base       = (volatile unsigned int *)_I2C1_BASE_ADDRESS,
+        .speed      = I2C_SPEED_FAST,
+        .sda_pin    = GPIO_PIN(PORT_D, 9),
+        .scl_pin    = GPIO_PIN(PORT_D, 10),
+    },
+};
+
+#define I2C_NUMOF          ARRAY_SIZE(i2c_config)
+/** @} */
+
 #ifdef __cplusplus
 }
 #endif
