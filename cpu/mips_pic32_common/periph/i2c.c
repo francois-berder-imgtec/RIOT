@@ -25,6 +25,7 @@
  */
 
 #include <assert.h>
+#include <errno.h>
 #include "board.h"
 #include "mutex.h"
 #include "periph/gpio.h"
@@ -176,10 +177,7 @@ int i2c_read_bytes(i2c_t dev, uint16_t addr,
     uint8_t *buffer = (uint8_t*)data;
     size_t byte_received_count = 0;
 
-    (void)flags;
-
-    if (dev == 0 || dev > I2C_NUMOF)
-        return -1;
+    assert(dev < I2C_NUMOF);
 
     if (len == 0)
         return 0;
@@ -226,10 +224,13 @@ int i2c_write_bytes(i2c_t dev, uint16_t addr, const void *data,
 {
     uint8_t *buffer = (uint8_t*)data;
     size_t byte_sent_count = 0;
-    (void)flags;
 
-    if (dev == 0 || dev > I2C_NUMOF)
-        return -1;
+    assert(dev < I2C_NUMOF);
+
+    /* If reload was NOT set, must either stop or start */
+    if ((flags & I2C_NOSTART) && (flags & I2C_NOSTOP)) {
+        return -EOPNOTSUPP;
+    }
 
     if (len == 0)
         return 0;
@@ -261,9 +262,8 @@ int i2c_write_regs(i2c_t dev, uint16_t addr, uint16_t reg,
 {
     uint8_t *buffer = (uint8_t*)data;
     size_t byte_sent_count = 0;
-    (void)flags;
-    if (dev == 0 || dev > I2C_NUMOF)
-        return -1;
+
+    assert(dev < I2C_NUMOF);
 
     if (len == 0)
         return 0;
@@ -289,12 +289,14 @@ int i2c_write_regs(i2c_t dev, uint16_t addr, uint16_t reg,
 
 void i2c_poweron(i2c_t dev)
 {
-    if (dev != 0 && dev <= I2C_NUMOF)
-        I2CxCONSET(base(dev)) = _I2C1CON_ON_MASK;
+    assert(dev < I2C_NUMOF);
+
+    I2CxCONSET(base(dev)) = _I2C1CON_ON_MASK;
 }
 
 void i2c_poweroff(i2c_t dev)
 {
-    if (dev != 0 && dev <= I2C_NUMOF)
-        I2CxCONCLR(base(dev)) = _I2C1CON_ON_MASK;
+    assert(dev < I2C_NUMOF);
+
+    I2CxCONCLR(base(dev)) = _I2C1CON_ON_MASK;
 }
