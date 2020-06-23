@@ -1,0 +1,31 @@
+# Copyright (c) 2020 Francois Berder
+#
+# This file is subject to the terms and conditions of the GNU Lesser
+# General Public License v2.1. See the file LICENSE in the top level
+# directory for more details.
+
+config CPU_ARCH_MIPS32R2
+    bool
+    select HAS_ARCH_MIPS
+    select HAS_ARCH_32BIT
+
+config CPU_ARCH
+    default "mips32r2" if CPU_ARCH_MIPS32R2
+
+ ## Common CPU symbols
+config CPU_CORE
+    default "m4k" if CPU_CORE_M4K
+    default "m5150" if CPU_CORE_M5150
+
+config CPU_CORE_M4K
+    bool
+    select CPU_ARCH_MIPS32R2
+
+config CPU_CORE_M5150
+    bool
+    select CPU_ARCH_MIPS32R2
+
+config HAS_ARCH_MIPS
+    bool
+    help
+        Indicates that the current architecture is MIPS.

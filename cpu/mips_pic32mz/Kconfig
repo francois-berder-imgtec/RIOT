@@ -1,0 +1,34 @@
+# Copyright (c) 2020 Francois Berder
+#
+# This file is subject to the terms and conditions of the GNU Lesser
+# General Public License v2.1. See the file LICENSE in the top level
+# directory for more details.
+
+config CPU_FAM_PIC32MZ
+    bool
+    select CPU_COMMON_PIC32
+    select CPU_CORE_M5150
+    select HAS_CPU_PIC32MZ
+    select HAS_PERIPH_HWRNG
+
+## CPU Models
+config CPU_MODEL_PIC32MZ2048EFG100
+    bool
+    select CPU_FAM_PIC32MZ
+
+config HAS_CPU_PIC32MZ
+    bool
+    help
+        Indicates that a 'PIC32MZ' cpu is being used.
+
+## Common CPU symbols
+config CPU_FAM
+    default "pic32mz" if CPU_FAM_PIC32MZ
+
+ config CPU_MODEL
+    default 'pic32mz2048efg100' if CPU_MODEL_PIC32MZ2048EFG100
+
+config CPU
+    default "pic32mz"
+
+source "$(RIOTCPU)/mips_pic32_common/Kconfig"

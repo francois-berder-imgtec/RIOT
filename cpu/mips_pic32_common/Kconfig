@@ -1,0 +1,15 @@
+# Copyright (c) 2020 Francois Berder
+#
+# This file is subject to the terms and conditions of the GNU Lesser
+# General Public License v2.1. See the file LICENSE in the top level
+# directory for more details.
+
+
+config CPU_COMMON_PIC32
+    bool
+    select HAS_PERIPH_CPUID
+    select HAS_PERIPH_GPIO
+    select HAS_PERIPH_GPIO_IRQ
+    select HAS_PERIPH_PM
+
+source "$(RIOTCPU)/mips32r2_common/Kconfig"
